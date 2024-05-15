@@ -1,8 +1,0 @@
-
-
-
-correo: developersthefuture@gmail.com
-clave: developers2024
-
-github:
-name: developersthefuture
