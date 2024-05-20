@@ -1,2 +1,12 @@
 server:
   port: 8090
+
+spring:
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate.ddl-auto: update
+  datasource:
+    url: jdbc:postgresql://localhost:5432/bd_inventory
+    username: postgres
+    password: 123456
+    driver-class-name: org.postgresql.Driver
