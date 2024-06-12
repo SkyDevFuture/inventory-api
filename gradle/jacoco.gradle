@@ -1,0 +1,48 @@
+tasks.withType(Test).configureEach {
+    useJUnitPlatform()
+
+    exclude '**/**Test'
+
+    testLogging {
+        exceptionFormat = 'full'
+        events = ['skipped', 'failed']
+    }
+
+    finalizedBy "jacoco${it.name.capitalize()}Report"
+}
+
+def coverageExclusions = [
+        '**/model/*.*',
+        '**/*Application.*'
+]
+
+jacocoTestReport {
+    dependsOn test
+    reports {
+        xml {
+            enabled false
+        }
+    }
+    /*afterEvaluate {
+        def jtrfiles = files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: coverageExclusions)
+        })
+        classDirectories.setfrom(jtrfiles)
+    }*/
+}
+
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                minimum = 0.80
+            }
+        }
+    }
+    /*afterEvaluate {
+        def jtcvFiles = files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: coverageExclusions)
+        })
+        classDirectories.setfrom(jtcvFiles)
+    }*/
+}
